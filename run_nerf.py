@@ -232,11 +232,19 @@ def render_rays(ray_batch,
         ret['disp0'] = disp_map_0
         ret['acc0'] = acc_map_0
         ret['z_std'] = tf.math.reduce_std(z_samples, -1)  # [N_rays]
-
+    
     for k in ret:
-        tf.debugging.check_numerics(ret[k], 'output {}'.format(k))
+        try:
+            tf.debugging.check_numerics(ret[k], 'output {}'.format(k))
+        except Exception:
+            ret[k] = replacenan(ret[k])
 
     return ret
+
+
+def replacenan(t):
+    """Tensor NaN replacement"""
+    return tf.where(tf.math.is_nan(t), tf.zeros_like(t), t)
 
 
 def batchify_rays(rays_flat, chunk=1024*32, **kwargs):
