@@ -1,3 +1,10 @@
+# NeRF With Tensorflow v2
+This repository is forked from the [original NeRF repository](https://github.com/bmild/nerf). This repository modified the existing NeRF so that it can be compatible with Tensorflow 2.x. The code is tested with the following configuration: NVIDIA GeForce RTX 3090, and Tensorflow 2.8. For more dependency configurations, refer to the new [`environment.yml`](./environment.yml).
+
+Below is the original README.md from the NeRF project code.
+
+<hr>
+
 # NeRF: Neural Radiance Fields
 ### [Project Page](http://tancik.com/nerf) | [Video](https://youtu.be/JuH79E8rdKc) | [Paper](https://arxiv.org/abs/2003.08934) | [Data](https://drive.google.com/drive/folders/128yBriW1IG_3NJ5Rp7APSTZsJqdJdfc1)
 [![Open Tiny-NeRF in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/bmild/nerf/blob/master/tiny_nerf.ipynb)<br>
