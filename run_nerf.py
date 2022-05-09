@@ -234,10 +234,7 @@ def render_rays(ray_batch,
         ret['z_std'] = tf.math.reduce_std(z_samples, -1)  # [N_rays]
     
     for k in ret:
-        try:
-            tf.debugging.check_numerics(ret[k], 'output {}'.format(k))
-        except Exception:
-            ret[k] = replacenan(ret[k])
+        tf.debugging.check_numerics(replacenan(ret[k]), 'output {}'.format(k))
 
     return ret
 
