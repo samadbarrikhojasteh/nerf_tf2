@@ -1,6 +1,24 @@
 # NeRF With Tensorflow v2
 This repository is forked from the [original NeRF repository](https://github.com/bmild/nerf). This repository modified the existing NeRF so that it can be compatible with Tensorflow 2.x. The code is tested with the following configuration: NVIDIA GeForce RTX 3090, and Tensorflow 2.8. For more dependency configurations, refer to the new [`environment.yml`](./environment.yml).
 
+## Common Error
+### 1. Unable to load GPU
+1. Activate Conda environment first
+```
+$ conda activate nerf_tf2
+```
+2. Set `LD_LIBRARY_PATH`
+```
+$ export LD_LIBRARY_PATH=/usr/local/lib
+```
+3. Test GPU
+```
+$ python3
+>>> import tensorflow as tf
+>>> tf.config.experimental.list_physical_devices('GPU')
+[PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')] <-- successfully loaded with a single GPU
+```
+
 Below is the original README.md from the NeRF project code.
 
 <hr>
