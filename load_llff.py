@@ -276,11 +276,29 @@ def center_n_rotate_poses(poses, bds):
     rad *= sc
     
     centroid = np.mean(poses_reset[:,:3,3], 0)
+    print("Centroid: ", centroid)
     zh = centroid[2]
     zh_min = np.amin(poses_reset[:,:3,3], 0)
     zh_max = np.amax(poses_reset[:,:3,3], 0)
-    print(zh_min)
-    radcircle = np.sqrt(rad**2-zh**2)*8
+    print("Poses_reset min: ", zh_min)
+    print("Poses_reset max: ", zh_max)
+
+    # Offsets to shift the fixed point in 3D scene
+
+    # Height offset, to be added to shift the fixed point height
+    offset_z = 1.0
+    vec2_offset = np.array([0, 0, offset_z])
+    # Ideally, you will also need to add the x and y coordinates 
+    # to "pos" vector to adjust to a fixed point of your choice in the image
+    # You can print the values of "centroid" to get an idea of setting offset_xy
+    offset_x = 0
+    offset_y = 0
+    offset_xy = np.array([offset_x, offset_y, 0.0])
+
+    # Adjust the radius in which you want to move around
+    # Distance from center of fixed point in image
+    scale = 8.0 # Just some scaling factor to increase radius
+    radcircle = np.sqrt(rad**2-zh**2) * scale
     new_poses = []
     
     for th in np.linspace(0.,2.*np.pi, 120):
@@ -290,12 +308,12 @@ def center_n_rotate_poses(poses, bds):
         right = np.array([1,0,0])
 
         # forward vector
-        vec2 = normalize(camorigin) + np.array([0, 0, 1.0])
+        vec2 = normalize(camorigin) + vec2_offset
         # up vector
         vec1 = normalize(np.cross(vec2, right))
         # right vector
-        vec0 = normalize(np.cross(vec2, vec1))
-        pos = camorigin# + np.array([-0.2, 0, 0])
+        vec0 = normalize(np.cross(vec1, vec2))
+        pos = camorigin + offset_xy
         ## ASD TEMP
         # Reference: https://www.cse.psu.edu/~rtc12/CSE486/lecture12.pdf
         ## How does the x axis of camera look like in world coordinates?
