@@ -283,10 +283,12 @@ def center_n_rotate_poses(poses, bds):
     print("Poses_reset min: ", zh_min)
     print("Poses_reset max: ", zh_max)
 
+    ## ASD TEMP 
+    # TODO: Can later add offset to config.txt/args.txt
     # Offsets to shift the fixed point in 3D scene
-
     # Height offset, to be added to shift the fixed point height
-    offset_z = 1.0
+    offset_z = 1.25 # for spiderman_gantry1
+    #offset_z = 1.0 # for spiderman_new
     vec2_offset = np.array([0, 0, offset_z])
     # Ideally, you will also need to add the x and y coordinates 
     # to "pos" vector to adjust to a fixed point of your choice in the image
@@ -297,8 +299,11 @@ def center_n_rotate_poses(poses, bds):
 
     # Adjust the radius in which you want to move around
     # Distance from center of fixed point in image
-    scale = 8.0 # Just some scaling factor to increase radius
-    radcircle = np.sqrt(rad**2-zh**2) * scale
+    radcircle = np.sqrt(rad**2-zh**2)
+    # Just some scaling factor to increase radius
+    scale = 20 # for spiderman_gantry1
+    #scale = 8 # for spiderman_new
+    radcircle *= scale
     new_poses = []
     
     for th in np.linspace(0.,2.*np.pi, 120):

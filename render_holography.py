@@ -24,7 +24,7 @@ from load_llff import load_llff_data
 
 
 basedir = './logs'
-expname = 'spiderman_new'
+expname = 'spiderman_gantry1'
 
 config = os.path.join(basedir, expname, 'config.txt')
 print('Args:')
@@ -33,6 +33,8 @@ parser = run_nerf.config_parser()
 
 args = parser.parse_args('--config {} --ft_path {}'.format(config, os.path.join(basedir, expname, 'model_050000.npy')))
 print('loaded args')
+print("spherify: ", args.spherify)
+print("center_n_rotate: ", args.center_n_rotate)
 
 images, poses, bds, render_poses, i_test = load_llff_data(args.datadir, args.factor, 
                                                           recenter=True, bd_factor=.75, 
