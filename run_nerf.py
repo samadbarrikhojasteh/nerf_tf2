@@ -549,6 +549,8 @@ def config_parser():
                         help='sampling linearly in disparity rather than depth')
     parser.add_argument("--spherify", action='store_true',
                         help='set for spherical 360 scenes')
+    parser.add_argument("--center_n_rotate", action='store_true',
+                        help='set for camera lookAt centered but position moving around it')                        
     parser.add_argument("--llffhold", type=int, default=8,
                         help='will take every 1/N images as LLFF test set, paper uses 8')
 

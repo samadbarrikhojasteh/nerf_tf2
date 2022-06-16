@@ -24,7 +24,7 @@ from load_llff import load_llff_data
 
 
 basedir = './logs'
-expname = 'spiderman'
+expname = 'spiderman_new'
 
 config = os.path.join(basedir, expname, 'config.txt')
 print('Args:')
@@ -36,7 +36,7 @@ print('loaded args')
 
 images, poses, bds, render_poses, i_test = load_llff_data(args.datadir, args.factor, 
                                                           recenter=True, bd_factor=.75, 
-                                                          spherify=args.spherify)
+                                                          spherify=args.spherify, center_n_rotate=args.center_n_rotate)
 
 H, W, focal = poses[0,:3,-1].astype(np.float32)
 H = int(H)
